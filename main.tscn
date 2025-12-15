@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=4 uid="uid://4pqund3nukl7"]
+[gd_scene load_steps=12 format=4 uid="uid://4pqund3nukl7"]
 
 [ext_resource type="Texture2D" uid="uid://iqipmgifaihk" path="res://images/floor.png" id="1_h2yge"]
 [ext_resource type="Script" uid="uid://80kl10p8d3vr" path="res://player.gd" id="2_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://uqou82ftfcqj" path="res://images/flag.png" id="2_lquwl"]
+[ext_resource type="Script" uid="uid://bcrc8ppwwe42m" path="res://flag.gd" id="3_7mycd"]
 [ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="3_lquwl"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7mycd"]
@@ -146,17 +148,39 @@ physics_layer_0/collision_layer = 1
 physics_layer_0/physics_material = SubResource("PhysicsMaterial_7mycd")
 sources/1 = SubResource("TileSetAtlasSource_272bh")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
+size = Vector2(104.26515, 166.31482)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
 size = Vector2(110.5, 110)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_lquwl"]
+
 [node name="Node2D" type="Node2D"]
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAD9////AQAAAAAAAAD/////AQAAAAEAAAAAAP//AQAAAAEAAAABAP//AQAAAAEAAAACAP//AQAAAAEAAAADAP//AQAAAAEAAAACAP7/AQAAAAAAAAADAP3/AQAAAAAAAAADAP7/AQAAAAEAAAD+////AQAAAAAAAAD///7/AQAAAAAAAAAAAP7/AQAAAAAAAAABAP7/AQAAAAAAAAA=")
+[node name="floor" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD9////AQAAAAAAAAD/////AQAAAAEAAAAAAP//AQAAAAEAAAABAP//AQAAAAEAAAACAP//AQAAAAEAAAADAP//AQAAAAEAAAACAP7/AQAAAAAAAAADAP3/AQAAAAAAAAADAP7/AQAAAAEAAAD+////AQAAAAAAAAD///7/AQAAAAAAAAAAAP7/AQAAAAAAAAABAP7/AQAAAAAAAAAEAPz/AQAAAAAAAAAEAP3/AQAAAAEAAAAEAP7/AQAAAAEAAAAEAP//AQAAAAEAAAA=")
 tile_set = SubResource("TileSet_5vw27")
+
+[node name="flag" type="Sprite2D" parent="."]
+position = Vector2(597.07294, -601.89825)
+scale = Vector2(1.1509115, 1.0762719)
+texture = ExtResource("2_lquwl")
+script = ExtResource("3_7mycd")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="flag"]
+position = Vector2(-33.949646, -14.960632)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="flag/Area2D"]
+position = Vector2(39.09955, 12.543335)
+scale = Vector2(1.0000001, 1)
+shape = SubResource("RectangleShape2D_1bvp3")
+metadata/_edit_lock_ = true
 
 [node name="Player" type="CharacterBody2D" parent="."]
 script = ExtResource("2_1bvp3")
+metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 position = Vector2(-322, -194)
@@ -168,3 +192,6 @@ shape = SubResource("RectangleShape2D_h2yge")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-319, -186)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_lquwl")
